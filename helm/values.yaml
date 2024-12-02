@@ -1,0 +1,14 @@
+replicaCount: 2  # 🔄 The number of replicas (instances) for the BeStrong API deployment
+
+image:
+  repository: steeve05/bestr  # 🖼️ The Docker image repository for the 'BeStrong' API
+  tag: latest  # 📅 The tag of the Docker image (e.g., 'latest' for the most recent version)
+
+environment: "Production"  # 🌍 The environment where the API is deployed (e.g., Production, Staging)
+
+ingress:
+  hostname: "bestrong.example.com"  # 🌐 The hostname for accessing the BeStrong API via Ingress
+  tlsSecret: "bestrong-tls"  # 🔐 The secret name for TLS certificates used to secure the connection
+
+certManager:
+  issuer: "letsencrypt-prod"  # 📜 The CertManager issuer for obtaining SSL certificates (e.g., 'letsencrypt-prod' for production certificates)
