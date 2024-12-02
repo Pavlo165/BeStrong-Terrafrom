@@ -1,6 +1,7 @@
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
+  default     = "bestrongcluster"
 }
 
 variable "location" {
@@ -12,6 +13,7 @@ variable "location" {
 variable "aks_cluster_name" {
   description = "The name of the AKS cluster"
   type        = string
+  default     = "testcluster"
 }
 
 variable "node_count" {
