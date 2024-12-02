@@ -18,11 +18,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "The Azure region where resources will be created"  # 📍 Region where the resources will be deployed
   type        = string
-<<<<<<< HEAD
-  default     = "westeu"
-=======
-  default     = "westus"  # 🌎 Default location set to West US
->>>>>>> 8aa9dc728b9f6bd70903aa4d68719ba4be0117af
+  default     = "westeu"  # 🌍 Default location
 }
 
 # 🧑‍💻 AKS Cluster Name
