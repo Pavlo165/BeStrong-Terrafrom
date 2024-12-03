@@ -27,12 +27,9 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
           az acr login --name $(ACR)
+          az acr helm push --name $(ACR) ./artifacts/*
 
-    - script: |
-        export HELM_EXPERIMENTAL_OCI=1
-        helm chart save ./artifacts/helm.tgz $(ACR).azurecr.io/helm/bestrong:1.0.0
-        helm chart push $(ACR).azurecr.io/helm/bestrong:1.0.0
-      displayName: "Push Helm Chart to ACR"
+    
 
 - stage: Deploy_to_AKS
   displayName: "Deploy to AKS"
