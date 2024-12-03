@@ -16,7 +16,7 @@ stages:
 
     - script: |
         helm lint ./helm
-        helm package ./helm--destination ./artifacts
+        helm package ./helm --destination ./artifacts
       displayName: "Lint and Pack Helm Charts"
 
     - task: AzureCLI@2
