@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size    = var.node_size       # 💻 VM size for the nodes
   }
 
-  # 🛡️ Assigning System-Managed Identity
+ # 🛡️ Assigning System-Managed Identity
   identity {
     type = "SystemAssigned"
   }
@@ -39,4 +39,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = {
     environment = "dev"              # 🛠️ Environment tag (development)
   }
+}
+
+resource "azurerm_public_ip" "aks_ingress_ip" {
+  name                = "aks-ingress-ip"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
 }
