@@ -6,8 +6,9 @@ image:
   pullPolicy: Always
 
 service:
-  type: ClusterIP
-  port: 80
+  type: ClusterIP  # Залишимо типом ClusterIP, оскільки доступ буде через Ingress
+  port: 80  # Порт, через який Service працюватиме
+  targetPort: 5001  # Порт, на якому працює ваш додаток
 
 ingress:
   enabled: true
@@ -15,7 +16,7 @@ ingress:
     kubernetes.io/ingress.class: nginx
   pathType: Prefix
   path: /
-  host: ""  # Домен не вказано, Ingress буде працювати за IP
+  host: "bestronger.pp.ua"  # Замініть на ваш домен
 
 resources:
   limits:
