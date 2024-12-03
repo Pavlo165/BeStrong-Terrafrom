@@ -1,5 +1,5 @@
-apiVersion: v2  # 📦 API version for the Helm chart (v2 is the standard for newer Helm charts)
-name: bestrong  # 🚀 Name of the Helm chart for your "BeStrong" API
-description: "Helm chart for deploying the 'BeStrong' API"  # 📜 Description of the chart, helping to understand its purpose
-version: 0.1.0  # 🔢 Version of the chart (corresponds to the version of the Helm package)
-appVersion: "1.0.0"  # 🎯 Version of your application (not the Helm chart version, but the 'BeStrong' API version)
+apiVersion: v2
+name: myapp
+description: "A Helm chart for deploying my application"
+version: 0.1.0
+appVersion: "1.0.0"
