@@ -1,19 +1,55 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+variables:
+- group: helm-pipeline
 
-#trigger:
-#- main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: Build_And_Push_Helm
+  displayName: "Build and Push Helm Charts to ACR"
+  jobs:
+  - job: PackAndPushHelm
+    displayName: "Pack and Push Helm Charts to ACR"
+    steps:
+    - task: HelmInstaller@1
+      displayName: "Install Helm"
+      inputs:
+        helmVersion: 'latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+    - script: |
+        helm lint ./helm
+        helm package ./helm--destination ./artifacts
+      displayName: "Lint and Pack Helm Charts"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    - task: AzureCLI@2
+      displayName: "Login to Azure"
+      inputs:
+        azureSubscription: "lnu_sub"
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az acr login --name $(ACR)
+
+    - script: |
+        az acr helm push ./artifacts/helm.tgz --name $(ACR)
+      displayName: "Push Helm Chart to ACR"
+
+- stage: Deploy_to_AKS
+  displayName: "Deploy to AKS"
+  dependsOn: Build_And_Push_Helm
+  jobs:
+  - job: Deploy
+    displayName: "Deploy to AKS"
+    steps:
+    - task: AzureCLI@2
+      displayName: "Login to Azure"
+      inputs:
+        azureSubscription: "lnu_sub"
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az aks get-credentials --resource-group $(resource-group) --name $(aks-cluster)
+
+    - script: |
+        helm repo add helmrepo https://$(ACR).azurecr.io/helm/v1/repo
+        helm repo update
+        helm upgrade --install bestrong helmrepo --namespace default
+      displayName: "Deploy Helm Chart to AKS"
