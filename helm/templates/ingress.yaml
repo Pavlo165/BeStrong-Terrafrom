@@ -4,6 +4,8 @@ metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/canary: "true" # Для Canary Deployment
+    nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canaryWeight }}" # Відсоток трафіку для Canary
 spec:
   rules:
   - host: {{ .Values.ingress.host }} # Домен, наприклад, myapp.example.com

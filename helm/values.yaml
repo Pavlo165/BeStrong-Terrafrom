@@ -1,19 +1,24 @@
-replicaCount: 2
+replicaCount:
+  stable: 2
+  canary: 1
 
 image:
-  repository: bestrongacr.azurecr.io/myapp # Замініть на URL вашого контейнера
-  tag: 0.0.1
-  pullPolicy: IfNotPresent
+  stable:
+    repository: bestrongacr.azurecr.io/myapp
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+  canary:
+    repository: bestrongacr.azurecr.io/myapp
+    tag: 0.0.2
+    pullPolicy: IfNotPresent
 
 service:
   type: LoadBalancer
   port: 80
   targetPort: 5001
 
-
-ingress:
-  host: "bestronger.pp.ua" # Замініть на ваш домен або IP
-
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+canaryWeight: 20 #
