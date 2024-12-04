@@ -20,7 +20,7 @@ stages:
       displayName: "Lint and Pack Helm Charts"
 
     - task: AzureCLI@2
-      displayName: "Login to Azure"
+      displayName: "Login to Azure and push actifact"
       inputs:
         azureSubscription: "lnu_sub"
         scriptType: bash
