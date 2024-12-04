@@ -21,7 +21,9 @@ stages:
 
     - script: |
         helm lint ./helm
-        echo "$(CHART_VERSION).$(Build.BuildId)""
+        echo $(CHART_VERSION)
+        echo $(Build.BuildId)
+        echo "$(CHART_VERSION).$(Build.BuildId)"
         helm package ./helm --version "$(CHART_VERSION).$(Build.BuildId)" --destination ./artifacts
       displayName: "Lint and Pack Helm Charts"
 
