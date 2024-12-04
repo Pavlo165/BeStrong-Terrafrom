@@ -9,7 +9,6 @@ service:
   type: LoadBalancer
   port: 80
   targetPort: 5001
-  secureport: 443
 
 resources:
   limits:
