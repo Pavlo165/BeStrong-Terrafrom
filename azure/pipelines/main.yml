@@ -27,7 +27,8 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
           az acr login --name $(ACR)
-          az acr helm push --name $(ACR) ./artifacts/*
+          export HELM_EXPERIMENTAL_OCI=1
+          helm push ./artifacts/* oci://$(ACR).azurecr.io/helmrepo
 
     
 
@@ -48,7 +49,6 @@ stages:
           az aks get-credentials --resource-group $(resource-group) --name $(aks-cluster)
 
     - script: |
-        helm repo add helmrepo https://$(ACR).azurecr.io/helm/v1/repo
-        helm repo update
+        az acr login --name $(ACR)
         helm upgrade --install bestrong helmrepo --namespace default
       displayName: "Deploy Helm Chart to AKS"
