@@ -23,7 +23,7 @@ namespace SampleWebApiAspNetCore
         {
             var info = new OpenApiInfo()
             {
-                Title = "Sample API",
+                Title = "Sample API V2Test",
                 Version = description.ApiVersion.ToString(),
                 Description = "A sample application with Swagger, Swashbuckle, and API versioning.",
             };
