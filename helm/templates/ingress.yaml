@@ -8,10 +8,6 @@ metadata:
     nginx.ingress.kubernetes.io/canary: "true" # Для Canary Deployment
     nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canaryWeight }}" # Відсоток трафіку для Canary
 spec:
-  tls:
-  - hosts:
-    - {{ .Values.ingress.host }} # Домен, наприклад, myapp.example.com
-    secretName: {{ .Values.ingress.tlsSecretName }} # Ім'я секрету з сертифікатом TLS
   rules:
   - host: {{ .Values.ingress.host }} # Домен, наприклад, myapp.example.com
     http:
