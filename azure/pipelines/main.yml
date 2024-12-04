@@ -21,7 +21,8 @@ stages:
 
     - script: |
         helm lint ./helm
-        helm package ./helm --version $(CHART_VERSION).$(Build.BuildId) --destination ./artifacts
+        echo "$(CHART_VERSION).$(Build.BuildId)""
+        helm package ./helm --version "$(CHART_VERSION).$(Build.BuildId)" --destination ./artifacts
       displayName: "Lint and Pack Helm Charts"
 
     - task: AzureCLI@2
