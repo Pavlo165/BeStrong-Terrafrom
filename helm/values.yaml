@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: bestrongacr.azurecr.io/myapp # Замініть на URL вашого контейнера
-  tag: 0.0.2
+  tag: 0.0.1
   pullPolicy: IfNotPresent
 
 service:
