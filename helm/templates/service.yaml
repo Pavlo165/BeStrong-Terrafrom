@@ -24,6 +24,10 @@ metadata:
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canaryWeight }}"
 spec:
+  tls:
+  - hosts:
+    - bestronger.pp.ua
+    secretName: bestrong-api-tls
   rules:
   - host: bestronger.pp.ua
     http:
