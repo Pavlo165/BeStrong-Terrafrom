@@ -28,8 +28,7 @@ stages:
         inlineScript: |
           az acr login --name $(ACR)
           export HELM_EXPERIMENTAL_OCI=1
-          helm pull oci://$(ACR).azurecr.io/helmrepo/myapp --version $(Build.BuildId)
-          helm upgrade --install myapp ./myapp-$(Build.BuildId).tgz
+          helm push ./artifacts/myapp-$(Build.BuildId).tgz oci://$(ACR).azurecr.io/helmrepo
 
     
 
