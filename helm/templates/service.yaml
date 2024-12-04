@@ -15,23 +15,4 @@ spec:
   externalTrafficPolicy: Local
   sessionAffinity: None
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ .Release.Name }}-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/canary: "true"
-    nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.canaryWeight }}"
-spec:
-  rules:
-  - host: bestronger.pp.ua
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: {{ .Release.Name }}-service
-            port:
-              number: {{ .Values.service.port }}
+
