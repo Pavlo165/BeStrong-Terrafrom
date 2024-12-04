@@ -17,8 +17,11 @@ service:
   port: 80
   targetPort: 5001
 
+ingress:
+  enabled: true
+  host: "bestronger.pp.ua" # Вкажіть ваш домен або IP
+  canaryWeight: 20 #
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
-canaryWeight: 20 #
