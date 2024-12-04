@@ -11,8 +11,6 @@ spec:
   ports:
   - port: {{ .Values.service.port }}
     targetPort: {{ .Values.service.targetPort }}
-
-  externalTrafficPolicy: Local
   sessionAffinity: None
 
 
