@@ -47,10 +47,8 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
           az aks get-credentials --resource-group $(resource-group) --name $(aks-cluster)
+          az acr login --name $(ACR)
+          export HELM_EXPERIMENTAL_OCI=1
+          helm pull oci://$(ACR).azurecr.io/helmrepo/myapp --version $(Build.BuildId)
+          helm upgrade --install myapp myapp-$(Build.BuildId).tgz
 
-    - script: |
-        az acr login --name $(ACR)
-        export HELM_EXPERIMENTAL_OCI=1
-        helm pull oci://$(ACR).azurecr.io/helmrepo/myapp --version $(Build.BuildId)
-        helm upgrade --install myapp myapp-$(Build.BuildId).tgz
-      displayName: "Deploy Helm Chart to AKS"
