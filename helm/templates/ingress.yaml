@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ingress.host }} # Домен, наприклад, myapp.example.com
-    secretName: bestrong-api-tls # Ім'я секрету з сертифікатом TLS
+    secretName: {{ .Values.ingress.tlsSecretName }} # Ім'я секрету з сертифікатом TLS
   rules:
   - host: {{ .Values.ingress.host }} # Домен, наприклад, myapp.example.com
     http:
