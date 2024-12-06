@@ -8,6 +8,11 @@ metadata:
     nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.ingress.canary.weight }}"
 spec:
   ingressClassName: ingress-nginx
+  defaultBackend: # Додаємо default backend
+    service:
+      name: myapp
+      port:
+        number: {{ .Values.service.port }}
   rules:
   - host: {{ .Values.ingress.host }}
     http:
@@ -15,8 +20,7 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          defaultBackend:
-            service:
-              name: myapp
-              port:
-                number: {{ .Values.service.port }}
+          service:
+            name: myapp
+            port:
+              number: {{ .Values.service.port }}
