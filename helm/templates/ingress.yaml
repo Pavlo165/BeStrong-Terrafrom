@@ -15,7 +15,8 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          service:
-            name: myapp
-            port:
-              number: {{ .Values.service.port }}
+          defaultBackend:
+            service:
+              name: myapp
+              port:
+                number: {{ .Values.service.port }}
