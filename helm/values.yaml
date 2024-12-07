@@ -18,7 +18,7 @@ service:
   targetPort: 5001
 
 ingress:
-  host: nginx.local
+  host: bestronger.pp.ua
   canary:
     enabled: "false"
     weight: 20
