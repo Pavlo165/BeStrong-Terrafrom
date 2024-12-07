@@ -13,15 +13,6 @@ stages:
       displayName: "Install Helm"
       inputs:
         helmVersion: 'latest'
-    - script: |
-        VERSION=$(grep '^version:' ./helm/Chart.yaml | awk '{print $2}')
-
-        # Формуємо змінну, яка включає Build.BuildId
-        FULL_VERSION="${VERSION}.${Build.BuildId}"
-
-        # Виводимо результат
-        echo "Full Version: $FULL_VERSION"
-      displayName: "Extract and Set Helm Chart Version"
 
     - script: |
         helm lint ./helm
@@ -49,7 +40,7 @@ stages:
     displayName: "Deploy to AKS"
     steps:
     - task: AzureCLI@2
-      displayName: "Login to Azure"
+      displayName: "Login to AKS and ACR and deploy"
       inputs:
         azureSubscription: "lnu_sub"
         scriptType: bash
