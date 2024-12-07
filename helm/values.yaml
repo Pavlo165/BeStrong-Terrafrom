@@ -18,9 +18,9 @@ service:
   targetPort: 5001
 
 ingress:
-  host: "bestronger.pp.ua" # Вкажіть ваш домен або IP
+  host: nginx.local
   canary:
-    enabled: "true"
+    enabled: "false"
     weight: 20
 
 nodeSelector: {}
