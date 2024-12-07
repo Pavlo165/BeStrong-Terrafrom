@@ -40,7 +40,7 @@ stages:
     displayName: "Deploy to AKS"
     steps:
     - task: AzureCLI@2
-      displayName: "Login to AKS and ACR and deploy"
+      displayName: "Login to AKS and ACR"
       inputs:
         azureSubscription: "lnu_sub"
         scriptType: bash
@@ -48,6 +48,14 @@ stages:
         inlineScript: |
           az aks get-credentials --resource-group $(resource-group) --name $(aks-cluster)
           az acr login --name $(ACR)
+
+    - task: AzureCLI@2
+      displayName: "Deploy with Helm"
+      inputs:
+        azureSubscription: "lnu_sub"
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
           export HELM_EXPERIMENTAL_OCI=1
           helm pull oci://$(ACR).azurecr.io/helmrepo/myapp --version $(Build.BuildId)
           helm upgrade --install myapp myapp-$(Build.BuildId).tgz
