@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bestrong-ingress
+  namespace: default  # Вкажіть ваш простір імен
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Назва вашого ClusterIssuer
+spec:
+  rules:
+  - host: bestronger.pp.ua  # Ваш домен
+    http:
+      paths:
+      - path: /swagger  # Шлях, на якому буде доступна ваша служба (за необхідності змініть)
+        pathType: Prefix
+        backend:
+          service:
+            name: bestrong-api-service  # Ім'я вашого сервісу API
+            port:
+              number: 80  # Порт вашої служби
+  tls:
+  - hosts:
+    - bestronger.pp.ua  # Ваш домен
+    secretName: bestrong-ssl-cert  # Ім'я секрету для сертифікату

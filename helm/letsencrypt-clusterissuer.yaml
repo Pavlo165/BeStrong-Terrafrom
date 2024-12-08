@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: your-email@example.com  # Ваш email для реєстрації на Let's Encrypt
+    server: https://acme-v02.api.letsencrypt.org/directory  # Продукційний сервер Let's Encrypt
+    privateKeySecretRef:
+      name: letsencrypt-prod-key  # Ім'я секрету для збереження приватного ключа
+    solvers:
+    - http01:
+        ingress:
+          class: nginx  # Вкажіть клас Ingress, який ви використовуєте (наприклад, nginx)
