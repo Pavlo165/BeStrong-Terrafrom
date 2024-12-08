@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.ingress.canary.weight }}"
 spec:
   ingressClassName: nginx
-   tls:
+  tls:
   - hosts:
     - {{ .Values.ingress.host }}
     secretName: {{ .Release.Name }}-tls # Cert-Manager автоматично створить цей секрет
