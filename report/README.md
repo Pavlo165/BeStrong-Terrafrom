@@ -302,6 +302,47 @@ spec:
 
 ```
 
+As you can see, we use canary deployment to deploy updates using a separate repository in the Azure container registry. If you pay attention to values.yaml, you can see that 20% of all traffic is redirected to the test version.
+
+* values.yaml:    
+```yaml
+replicaCount:
+  stable: 2
+  canary: 1
+
+image:
+  stable:
+    repository: bestrongacr.azurecr.io/myapp
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+  canary:
+    repository: bestrongacr.azurecr.io/myapp
+    tag: 0.0.2
+    pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP 
+  port: 80
+  targetPort: 5001
+
+ingress:
+  host: bestronger.pp.ua
+  canary:
+    enabled: "false"
+    weight: 20
+
+clusterIssuer:
+  enabled: true
+  name: letsencrypt-prod
+  email: mothuradpavlo@gmail.com
+  privateKeySecretName: letsencrypt-prod
+  ingressClass: nginx
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+```
+
 Next, install cert-manager and create a certificate using Let's Encrypt:
 * cluster-issuer.yaml:    
 ```yaml
