@@ -23,6 +23,13 @@ ingress:
     enabled: "false"
     weight: 20
 
+clusterIssuer:
+  enabled: true
+  name: letsencrypt-prod
+  email: mothuradpavlo@gmail.com # Вкажіть ваш email
+  privateKeySecretName: letsencrypt-prod
+  ingressClass: nginx
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
