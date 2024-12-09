@@ -36,6 +36,7 @@ spec:
             name: {{ .Values.ingress.prometheus.svcName }}
             port:
               number: {{ .Values.ingress.prometheus.port }}
+            namespace: {{ .Values.ingress.prometheus.namespace }}
   - host: {{ .Values.ingress.grafana.host }}
     http:
       paths:
@@ -46,3 +47,4 @@ spec:
             name: {{ .Values.ingress.grafana.svcName }}
             port:
               number: {{ .Values.ingress.grafana.port }}
+            namespace: {{ .Values.ingress.grafana.namespace }}
