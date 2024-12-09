@@ -24,3 +24,23 @@ spec:
             name: myapp
             port:
               number: {{ .Values.service.port }}
+  - host: {{ .Values.ingress.prometheus.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.ingress.prometheus.svcName }}
+            port:
+              number: {{ .Values.ingress.prometheus.port }}
+  - host: {{ .Values.ingress.grafana.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.ingress.grafana.svcName }}
+            port:
+              number: {{ .Values.ingress.grafana.port }}
