@@ -26,12 +26,10 @@ ingress:
     host: prometheus.bestronger.pp.ua
     port: 9090
     svcName: prometheus-kube-prometheus-prometheus
-    namespace: monitoring
   grafana:
     host: grafana.bestronger.pp.ua
     port: 80
     svcName: prometheus-grafana
-    namespace: monitoring
 
 clusterIssuer:
   enabled: true

@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
+  namespace: monitoring
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/canary: "{{ .Values.ingress.canary.enabled }}"
@@ -12,8 +13,6 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ingress.host }}
-    - {{ .Values.ingress.prometheus.host }}
-    - {{ .Values.ingress.grafana.host }}
     secretName: {{ .Release.Name }}-tls # Cert-Manager автоматично створить цей секрет
   rules:
   - host: {{ .Values.ingress.host }}
@@ -26,6 +25,27 @@ spec:
             name: myapp
             port:
               number: {{ .Values.service.port }}
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-monitoring-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/canary: "{{ .Values.ingress.canary.enabled }}"
+    nginx.ingress.kubernetes.io/canary-weight: "{{ .Values.ingress.canary.weight }}"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Values.ingress.prometheus.host }}
+    - {{ .Values.ingress.grafana.host }}
+    secretName: {{ .Release.Name }}-tls # Cert-Manager автоматично створить цей секрет
+  rules:
   - host: {{ .Values.ingress.prometheus.host }}
     http:
       paths:
@@ -36,7 +56,6 @@ spec:
             name: {{ .Values.ingress.prometheus.svcName }}
             port:
               number: {{ .Values.ingress.prometheus.port }}
-            namespace: {{ .Values.ingress.prometheus.namespace }}
   - host: {{ .Values.ingress.grafana.host }}
     http:
       paths:
@@ -47,4 +66,3 @@ spec:
             name: {{ .Values.ingress.grafana.svcName }}
             port:
               number: {{ .Values.ingress.grafana.port }}
-            namespace: {{ .Values.ingress.grafana.namespace }}
