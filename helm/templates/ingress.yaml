@@ -12,6 +12,8 @@ spec:
   tls:
   - hosts:
     - {{ .Values.ingress.host }}
+    - {{ .Values.ingress.prometheus.host }}
+    - {{ .Values.ingress.grafana.host }}
     secretName: {{ .Release.Name }}-tls # Cert-Manager автоматично створить цей секрет
   rules:
   - host: {{ .Values.ingress.host }}
