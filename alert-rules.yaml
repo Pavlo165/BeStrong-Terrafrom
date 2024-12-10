@@ -1,26 +1,17 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: myapp-alert-rules
+  name: myapp-cpu-alert
   namespace: monitoring
 spec:
   groups:
-  - name: myapp-alerts
+  - name: myapp-cpu-alerts
     rules:
-    - alert: MyAppHighMemoryUsage
-      expr: sum(container_memory_usage_bytes{pod=~"myapp*"}) / sum(container_memory_working_set_bytes{pod=~"myapp*"}) > 0.7
-      for: 1m
-      labels:
-        severity: warning
-      annotations:
-        summary: "High memory usage detected in MyApp pods"
-        description: "Memory usage in one or more myapp pods exceeded 70% for 1 minute."
-
     - alert: MyAppHighCPUUsage
-      expr: sum(rate(container_cpu_usage_seconds_total{pod=~"myapp*"}[2m])) / sum(container_cpu_quota{pod=~"myapp*"}) > 0.7
+      expr: sum(rate(container_cpu_usage_seconds_total{pod=~"myapp.*"}[2m])) / sum(kube_pod_container_resource_limits_cpu_cores{pod=~"myapp.*"}) > 0.7
       for: 1m
       labels:
         severity: warning
       annotations:
         summary: "High CPU usage detected in MyApp pods"
-        description: "CPU usage in one or more myapp pods exceeded 70% for 1 minute."
+        description: "One or more MyApp pods are using more than 70% of their CPU limits for over 1 minute."
