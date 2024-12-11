@@ -30,6 +30,10 @@ ingress:
     host: grafana.bestronger.pp.ua
     port: 80
     svcName: prometheus-grafana
+  kubecost:
+    host: kubecost.bestronger.pp.ua
+    port: 9090
+    svcName: kubecost-cost-analyzer
 
 clusterIssuer:
   enabled: true

@@ -64,3 +64,13 @@ spec:
             name: {{ .Values.ingress.grafana.svcName }}
             port:
               number: {{ .Values.ingress.grafana.port }}
+  - host: {{ .Values.ingress.kubecost.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.ingress.kubecost.svcName }}
+            port:
+              number: {{ .Values.ingress.kubecost.port }}
