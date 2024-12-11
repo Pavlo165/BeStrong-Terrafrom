@@ -70,7 +70,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-monitoring-ingress
+  name: {{ .Release.Name }}-monitoring-kubecost-ingress
   namespace: monitoring
   annotations:
     kubernetes.io/ingress.class: nginx
