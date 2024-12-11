@@ -42,6 +42,7 @@ spec:
   - hosts:
     - {{ .Values.ingress.prometheus.host }}
     - {{ .Values.ingress.grafana.host }}
+    - {{ .Values.ingress.kubecost.host }}
     secretName: {{ .Release.Name }}-tls
   rules:
   - host: {{ .Values.ingress.prometheus.host }}
