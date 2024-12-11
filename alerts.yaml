@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: myapp-alerts
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: MyAppAlerts
+      rules:
+        - alert: HighCPUUsage
+          expr: (100 * sum(irate(container_cpu_usage_seconds_total{pod=~"myapp-.*"}[1m]))) > 70
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High CPU usage for myapp containers"
+            description: "The CPU usage for myapp containers is above 70% for more than 2 minutes. Current value: {{ $value }}%"
