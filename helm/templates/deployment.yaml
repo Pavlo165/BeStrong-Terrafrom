@@ -23,6 +23,13 @@ spec:
         imagePullPolicy: {{ .Values.image.stable.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.targetPort }}
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
       nodeSelector: {{ .Values.nodeSelector | toJson }}
       tolerations: {{ .Values.tolerations | toJson }}
       affinity: {{ .Values.affinity | toJson }}
@@ -54,6 +61,13 @@ spec:
         imagePullPolicy: {{ .Values.image.canary.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.targetPort }}
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
       nodeSelector: {{ .Values.nodeSelector | toJson }}
       tolerations: {{ .Values.tolerations | toJson }}
       affinity: {{ .Values.affinity | toJson }}
