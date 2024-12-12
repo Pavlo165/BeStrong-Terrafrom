@@ -42,6 +42,12 @@ clusterIssuer:
   privateKeySecretName: letsencrypt-prod
   ingressClass: nginx
 
+kubecostProductConfigs:
+  azureOfferDurableID: MS-AZR-0170P
+  azureBillingRegion: ua
+  currencyCode: USD
+
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
