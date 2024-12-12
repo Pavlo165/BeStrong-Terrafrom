@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size    = var.node_size       # 💻 VM size for the nodes
   }
 
- # 🛡️ Assigning System-Managed Identity
+  # 🛡️ Assigning System-Managed Identity
   identity {
     type = "SystemAssigned"
   }
@@ -39,5 +39,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = {
     environment = "dev"              # 🛠️ Environment tag (development)
   }
+
+  # 🔐 Enable OIDC issuer
+  oidc_issuer_enabled = true
 }
 
