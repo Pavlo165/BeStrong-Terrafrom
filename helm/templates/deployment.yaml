@@ -25,11 +25,11 @@ spec:
         - containerPort: {{ .Values.service.targetPort }}
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "150m"
-          limits:
             memory: "256Mi"
             cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
       nodeSelector: {{ .Values.nodeSelector | toJson }}
       tolerations: {{ .Values.tolerations | toJson }}
       affinity: {{ .Values.affinity | toJson }}
@@ -63,11 +63,11 @@ spec:
         - containerPort: {{ .Values.service.targetPort }}
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "150m"
-          limits:
             memory: "256Mi"
             cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
       nodeSelector: {{ .Values.nodeSelector | toJson }}
       tolerations: {{ .Values.tolerations | toJson }}
       affinity: {{ .Values.affinity | toJson }}
