@@ -10,8 +10,8 @@ spec:
     - name: MyAppAlerts
       rules:
         - alert: HighCPUUsage
-          expr: (100 * sum(irate(container_cpu_usage_seconds_total{pod=~"myapp-.*"}[1m]))) > 70
-          for: 2m
+          expr: (sum(rate(container_cpu_usage_seconds_total{pod=~"myapp-.*"}[1m])) * 1000 / 250 * 100) > 70
+          for: 1m
           labels:
             severity: warning
           annotations:
@@ -19,7 +19,7 @@ spec:
             description: "The CPU usage for myapp containers is above 70% for more than 2 minutes. Current value: {{ $value }}%"
         - alert: HighMemoryUsage
           expr: (100 * sum(container_memory_working_set_bytes{pod=~"myapp-.*"}) / sum(machine_memory_bytes)) > 70
-          for: 2m
+          for: 1m
           labels:
             severity: warning
           annotations:
