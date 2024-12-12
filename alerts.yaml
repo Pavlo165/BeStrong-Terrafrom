@@ -17,3 +17,11 @@ spec:
           annotations:
             summary: "High CPU usage for myapp containers"
             description: "The CPU usage for myapp containers is above 70% for more than 2 minutes. Current value: {{ $value }}%"
+        - alert: HighMemoryUsage
+          expr: (100 * sum(container_memory_working_set_bytes{pod=~"myapp-.*"}) / sum(machine_memory_bytes)) > 70
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High memory usage for myapp containers"
+            description: "The memory usage for myapp containers is above 70% for more than 2 minutes. Current value: {{ $value }}%"
