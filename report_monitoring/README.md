@@ -10,9 +10,9 @@
 ### Kubecost Ingress
 - Configured Ingress for the Kubecost service.
 - Enabled TLS and basic authentication via the `kubecost-basic-auth` secret.
-
-## Step 2: Install Prometheus and Grafana 📈
 ![Monitoring Dashboard](./images/Picture2.jpg)
+## Step 2: Install Prometheus and Grafana 📈
+
 ### Description
 - Prometheus and Grafana were deployed in the Kubernetes cluster.
 - Ingress configurations for both services were applied with HTTPS enabled.
