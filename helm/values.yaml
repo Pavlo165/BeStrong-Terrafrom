@@ -22,10 +22,6 @@ ingress:
   canary:
     enabled: "false"
     weight: 20
-  prometheus:
-    host: prometheus.bestronger.pp.ua
-    port: 9090
-    svcName: prometheus-kube-prometheus-prometheus
   grafana:
     host: grafana.bestronger.pp.ua
     port: 80

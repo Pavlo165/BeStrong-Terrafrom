@@ -40,20 +40,9 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - {{ .Values.ingress.prometheus.host }}
     - {{ .Values.ingress.grafana.host }}
     secretName: {{ .Release.Name }}-ingress-tls
   rules:
-  - host: {{ .Values.ingress.prometheus.host }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.ingress.prometheus.svcName }}
-            port:
-              number: {{ .Values.ingress.prometheus.port }}
   - host: {{ .Values.ingress.grafana.host }}
     http:
       paths:
