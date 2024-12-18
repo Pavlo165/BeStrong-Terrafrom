@@ -11,5 +11,5 @@
 provider "azurerm" {
   features {}  # 🚀 Enables the default features for the azurerm provider
   
-  subscription_id = "fdc51540-ce97-42ba-a64d-feb455570f4f"  # 🔑 Azure Subscription ID
+  subscription_id = "5c38c4d4-fc47-44d4-a351-139d196a9f4c"  # 🔑 Azure Subscription ID
 }
