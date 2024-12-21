@@ -1,4 +1,4 @@
 FROM fluent/fluentd-kubernetes-daemonset:elasticsearch
 
-# Копіюємо власний конфігураційний файл
+# change default config
 COPY fluent.conf /fluentd/etc/fluent.conf
